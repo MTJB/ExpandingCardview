@@ -1,34 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.example.mbrpc.expandingcardview.MainActivity">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="50dp"
+        android:background="@color/white"
+        android:id="@+id/logo"
+        android:src="@drawable/allstate_logo" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+    <!-- Card view for graph without details -->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_graph_condensed"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="4dp" >
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            android:layout_height="match_parent">
 
-    </android.support.design.widget.AppBarLayout>
+            <WebView
+                android:id="@+id/webViewCondensed"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_alignParentTop="true"/>
 
-    <include layout="@layout/content_main" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="toggleDetails"
+                android:orientation="horizontal"
+                android:padding="8dp"
+                android:layout_below="@id/webViewCondensed"
+                android:background="@android:color/white">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_dialog_email" />
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Details"
+                    android:textColor="@android:color/black"
+                    android:background="@android:color/white"
+                    android:textSize="20sp"/>
 
-</android.support.design.widget.CoordinatorLayout>
+                <ImageView
+                    android:id="@+id/imageViewExpand"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="Details"
+                    android:src="@drawable/more"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+
+    <!-- Card view for graph with details -->
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_graph_expanded"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        card_view:cardCornerRadius="2dp"
+        card_view:cardElevation="4dp" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/passed"
+                android:layout_height="50dp"
+                android:text="Passed"
+                android:background="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/warning"
+                android:layout_height="50dp"
+                android:text="Warning"
+                android:layout_below="@+id/passed"
+                android:background="@color/white"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:id="@+id/fail"
+                android:layout_height="50dp"
+                android:text="Fail"
+                android:layout_below="@+id/warning"
+                android:background="@color/white"/>
+
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
